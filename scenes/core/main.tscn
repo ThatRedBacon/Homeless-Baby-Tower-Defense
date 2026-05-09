@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://decjrcjahh7sf"]
 
 [ext_resource type="PackedScene" uid="uid://cwx3mdjxrs30x" path="res://scenes/enemies/enemy.tscn" id="1_fgbdc"]
+[ext_resource type="Script" uid="uid://b7j4q8uhjudmj" path="res://scripts/path_follow_enemy.gd" id="1_i4cec"]
 
 [sub_resource type="Curve2D" id="Curve2D_6rktp"]
 _data = {
@@ -16,6 +17,12 @@ curve = SubResource("Curve2D_6rktp")
 [node name="Line2D" type="Line2D" parent="Path2D" unique_id=519911029]
 points = PackedVector2Array(0, 469, 334, 462, 327, 174, 562, 164, 575, 505, 915, 149, 1169, 142)
 
-[node name="Enemy" parent="." unique_id=1353514344 instance=ExtResource("1_fgbdc")]
-position = Vector2(21, 466.99997)
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=397469697]
+position = Vector2(-1, 474)
+rotation = -0.02685921
+script = ExtResource("1_i4cec")
+
+[node name="Enemy" parent="Path2D/PathFollow2D" unique_id=1353514344 instance=ExtResource("1_fgbdc")]
+position = Vector2(22.180058, -6.4066772)
+rotation = 0.02685921
 scale = Vector2(0.55, 0.55)
