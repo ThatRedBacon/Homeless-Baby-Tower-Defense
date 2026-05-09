@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://cwy2qudqk2yte"]
+
+[ext_resource type="Script" uid="uid://ri3br3xqx58l" path="res://scripts/towers/tower.gd" id="1_by3tn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tsx0o"]
+radius = 150.0
+
+[node name="Tower" type="Node2D" unique_id=1064112887]
+script = ExtResource("1_by3tn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=362141614]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=664870233]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=123223021]
+shape = SubResource("CircleShape2D_tsx0o")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
