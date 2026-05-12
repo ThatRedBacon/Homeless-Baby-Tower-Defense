@@ -1,11 +1,17 @@
 extends Node2D
 
+@export var maxHealth: int = 10
+var currentHealth: int 
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _ready():
+	currentHealth = maxHealth
 
+func takeDamage(amount: int):
+	currentHealth -= amount
+	print("Enemy HP:", currentHealth)
+	
+	if currentHealth <= 0:
+		die()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func die():
+	queue_free()

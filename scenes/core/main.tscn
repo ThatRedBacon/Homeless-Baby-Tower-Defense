@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://decjrcjahh7sf"]
 
+[ext_resource type="Script" uid="uid://ccco34uyrciv3" path="res://scripts/main.gd" id="1_2dmjg"]
 [ext_resource type="PackedScene" uid="uid://cwx3mdjxrs30x" path="res://scenes/enemies/enemy.tscn" id="1_fgbdc"]
+[ext_resource type="Script" uid="uid://b7j4q8uhjudmj" path="res://scripts/path_follow_enemy.gd" id="1_i4cec"]
+[ext_resource type="PackedScene" uid="uid://cwy2qudqk2yte" path="res://scenes/towers/tower.tscn" id="2_b6u03"]
 
 [sub_resource type="Curve2D" id="Curve2D_6rktp"]
 _data = {
@@ -9,6 +12,7 @@ _data = {
 point_count = 7
 
 [node name="Main" type="Node2D" unique_id=664168051]
+script = ExtResource("1_2dmjg")
 
 [node name="Path2D" type="Path2D" parent="." unique_id=1361717155]
 curve = SubResource("Curve2D_6rktp")
@@ -16,6 +20,19 @@ curve = SubResource("Curve2D_6rktp")
 [node name="Line2D" type="Line2D" parent="Path2D" unique_id=519911029]
 points = PackedVector2Array(0, 469, 334, 462, 327, 174, 562, 164, 575, 505, 915, 149, 1169, 142)
 
-[node name="Enemy" parent="." unique_id=1353514344 instance=ExtResource("1_fgbdc")]
-position = Vector2(21, 466.99997)
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=397469697]
+position = Vector2(-1, 474)
+rotation = -0.02685921
+script = ExtResource("1_i4cec")
+
+[node name="Enemy" parent="Path2D/PathFollow2D" unique_id=1353514344 instance=ExtResource("1_fgbdc")]
+position = Vector2(22.180058, -6.4066772)
+rotation = 0.02685921
 scale = Vector2(0.55, 0.55)
+
+[node name="Towers" type="Node2D" parent="." unique_id=933239355]
+
+[node name="Tower" parent="Towers" unique_id=1064112887 instance=ExtResource("2_b6u03")]
+position = Vector2(445, 242)
+
+[connection signal="reachedEnd" from="Path2D/PathFollow2D" to="." method="_on_path_follow_2d_reached_end"]
