@@ -15,6 +15,8 @@ var isSelected = false
 @onready var attackArea = $AttackArea
 @onready var attackShape = $AttackArea/CollisionShape2D
 @onready var rangeIndicator = $RangeIndicator
+@onready var selectionManager = get_tree().get_first_node_in_group("selectionManager")
+
 
 # tower fires on its designated target
 func shoot():
@@ -52,7 +54,16 @@ func updateRange():
 
 # called when user clicks tower. changes tower radius visibility
 func selectTower():
-	isSelected = !isSelected
+	selectionManager.selectTower(self)
+
+# sets self.isSelected to true
+func select():
+	isSelected	= true
+	queue_redraw()
+
+# sets self.isSelected to false
+func deselect():
+	isSelected = false
 	queue_redraw()
 
 # Called when the node enters the scene tree for the first time.
@@ -84,3 +95,4 @@ func _on_click_area_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 			selectTower()
+			get_viewport().set_input_as_handled()
